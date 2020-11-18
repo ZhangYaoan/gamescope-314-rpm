@@ -1,6 +1,6 @@
 Name:           gamescope
 Version:        3.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
@@ -62,5 +62,8 @@ Recommends:     mesa-vulkan-drivers
 
 
 %changelog
+* Wed Nov 18 2020 Aleksei Bavshin <alebastr@fedoraproject.org> - 3.7-2
+- Rebuild for wlroots 0.12
+
 * Sun Oct  4 15:56:25 EDT 2020 Neal Gompa <ngompa13@gmail.com> - 3.7-1
 - Initial packaging
