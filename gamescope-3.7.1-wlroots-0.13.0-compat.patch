@@ -1,0 +1,60 @@
+From fbc6bd0c0882c5c60232fe68e315799566adb476 Mon Sep 17 00:00:00 2001
+From: Simon Ser <contact@emersion.fr>
+Date: Wed, 16 Dec 2020 11:47:32 +0100
+Subject: [PATCH] Update wlroots and libliftoff
+
+---
+ src/wlserver.cpp       | 6 ++++--
+ subprojects/libliftoff | 2 +-
+ subprojects/wlroots    | 2 +-
+ 3 files changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/src/wlserver.cpp b/src/wlserver.cpp
+index 7830b7a..85869b8 100644
+--- a/src/wlserver.cpp
++++ b/src/wlserver.cpp
+@@ -23,8 +23,10 @@ extern "C" {
+ #include <wlr/backend/headless.h>
+ #include <wlr/backend/multi.h>
+ #include <wlr/backend/libinput.h>
+-#include <wlr/interfaces/wlr_pointer.h>
+ #include <wlr/render/wlr_renderer.h>
++#include <wlr/types/wlr_keyboard.h>
++#include <wlr/types/wlr_pointer.h>
++#include <wlr/types/wlr_touch.h>
+ #include <wlr/xwayland.h>
+ #include <wlr/util/log.h>
+ #undef static
+@@ -135,7 +137,7 @@ static void wlserver_handle_key(struct wl_listener *listener, void *data)
+ 	xkb_keycode_t keycode = event->keycode + 8;
+ 	xkb_keysym_t keysym = xkb_state_key_get_one_sym(keyboard->device->keyboard->xkb_state, keycode);
+ 
+-	if (wlserver.wlr.session && event->state == WLR_KEY_PRESSED && keysym >= XKB_KEY_XF86Switch_VT_1 && keysym <= XKB_KEY_XF86Switch_VT_12) {
++	if (wlserver.wlr.session && event->state == WL_KEYBOARD_KEY_STATE_PRESSED && keysym >= XKB_KEY_XF86Switch_VT_1 && keysym <= XKB_KEY_XF86Switch_VT_12) {
+ 		unsigned vt = keysym - XKB_KEY_XF86Switch_VT_1 + 1;
+ 		wlr_session_change_vt(wlserver.wlr.session, vt);
+ 		return;
+
+From 62a005f1f34c413bef81809ffcfb7e46b3fc1786 Mon Sep 17 00:00:00 2001
+From: Sefa Eyeoglu <contact@scrumplex.net>
+Date: Thu, 7 Jan 2021 12:07:28 +0100
+Subject: [PATCH] fix: remove wrong parameter for wlr_headless_backend_create
+
+---
+ src/wlserver.cpp    | 2 +-
+ subprojects/wlroots | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/wlserver.cpp b/src/wlserver.cpp
+index 85869b8..186856d 100644
+--- a/src/wlserver.cpp
++++ b/src/wlserver.cpp
+@@ -442,7 +442,7 @@ int wlserver_init(int argc, char **argv, bool bIsNested) {
+ 
+ 	wl_signal_add( &wlserver.wlr.multi_backend->events.new_input, &new_input_listener );
+ 
+-	wlserver.wlr.headless_backend = wlr_headless_backend_create( wlserver.wl_display, NULL );
++	wlserver.wlr.headless_backend = wlr_headless_backend_create( wlserver.wl_display );
+ 	if ( wlserver.wlr.headless_backend == NULL )
+ 	{
+ 		return 1;
