@@ -31,7 +31,7 @@ BuildRequires:  pkgconfig(wayland-protocols) >= 1.17
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(wlroots) >= 0.13.0
-BuildRequires:  pkgconfig(liftoff) >= %{libliftoff_minver}
+BuildRequires:  pkgconfig(libliftoff) >= %{libliftoff_minver}
 BuildRequires:  pkgconfig(libcap)
 BuildRequires:  /usr/bin/glslangValidator
 
