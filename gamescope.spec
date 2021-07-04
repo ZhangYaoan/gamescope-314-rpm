@@ -1,15 +1,14 @@
 Name:           gamescope
-Version:        3.7.1
+Version:        3.8.4
 Release:        1%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
 URL:            https://github.com/Plagman/gamescope
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-# wlroots 0.13.0 compatibility patches:
-# https://github.com/Plagman/gamescope/commit/fbc6bd0c0882c5c60232fe68e315799566adb476
-# https://github.com/Plagman/gamescope/pull/150
-Patch0:         gamescope-3.7.1-wlroots-0.13.0-compat.patch
+# libliftoff 0.1.0 compatibility patches:
+# https://github.com/Plagman/gamescope/commit/eb5972ccf61707c9549cea7d2551ed8f904158fb
+Patch0:         0001-Bump-libliftoff-to-0.1.0.patch
 
 BuildRequires:  meson >= 0.54.0
 BuildRequires:  ninja-build
@@ -30,7 +29,7 @@ BuildRequires:  pkgconfig(wayland-protocols) >= 1.17
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(wlroots) >= 0.13.0
-BuildRequires:  pkgconfig(liftoff)
+BuildRequires:  pkgconfig(liftoff) >= 0.1.0
 BuildRequires:  pkgconfig(libcap)
 BuildRequires:  /usr/bin/glslangValidator
 
@@ -61,6 +60,9 @@ Recommends:     mesa-vulkan-drivers
 
 
 %changelog
+* Sun Jul 04 2021 Neal Gompa <ngompa13@gmail.com> - 3.8.4-1
+- Rebase to version 3.8.4
+
 * Wed Apr 07 2021 Aleksei Bavshin <alebastr@fedoraproject.org> - 3.7.1-1
 - Update to 3.7.1
 - Add patch for wlroots 0.13.0 API changes
