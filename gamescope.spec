@@ -1,3 +1,5 @@
+%global libliftoff_minver 0.1.0
+
 Name:           gamescope
 Version:        3.8.4
 Release:        1%{?dist}
@@ -29,10 +31,12 @@ BuildRequires:  pkgconfig(wayland-protocols) >= 1.17
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(wlroots) >= 0.13.0
-BuildRequires:  pkgconfig(liftoff) >= 0.1.0
+BuildRequires:  pkgconfig(liftoff) >= %{libliftoff_minver}
 BuildRequires:  pkgconfig(libcap)
 BuildRequires:  /usr/bin/glslangValidator
 
+# libliftoff hasn't bumped soname, but API/ABI has changed for 0.1.0 release
+Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
 Requires:       xorg-x11-server-Xwayland
 Recommends:     mesa-dri-drivers
 Recommends:     mesa-vulkan-drivers
@@ -62,6 +66,9 @@ Recommends:     mesa-vulkan-drivers
 %changelog
 * Sun Jul 04 2021 Neal Gompa <ngompa13@gmail.com> - 3.8.4-1
 - Rebase to version 3.8.4
+- Drop merged wlroots patch
+- Backport patch for libliftoff 0.1.0 support
+- Add explicit dependency on libliftoff >= 0.1.0
 
 * Wed Apr 07 2021 Aleksei Bavshin <alebastr@fedoraproject.org> - 3.7.1-1
 - Update to 3.7.1
