@@ -2,7 +2,7 @@
 
 Name:           gamescope
 Version:        3.8.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
@@ -31,7 +31,7 @@ BuildRequires:  pkgconfig(wayland-server)
 BuildRequires:  pkgconfig(wayland-protocols) >= 1.17
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(sdl2)
-BuildRequires:  pkgconfig(wlroots) >= 0.13.0
+BuildRequires:  (pkgconfig(wlroots) >= 0.13.0 with pkgconfig(wlroots) < 0.14.0)
 BuildRequires:  pkgconfig(libliftoff) >= %{libliftoff_minver}
 BuildRequires:  pkgconfig(libcap)
 BuildRequires:  /usr/bin/glslangValidator
@@ -65,6 +65,9 @@ Recommends:     mesa-vulkan-drivers
 
 
 %changelog
+* Wed Jul 07 2021 Aleksei Bavshin <alebastr@fedoraproject.org> - 3.8.4-2
+- Pin wlroots dependency to 0.13
+
 * Sun Jul 04 2021 Neal Gompa <ngompa13@gmail.com> - 3.8.4-1
 - Rebase to version 3.8.4
 - Drop merged wlroots patch
