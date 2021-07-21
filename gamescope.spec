@@ -2,7 +2,7 @@
 
 Name:           gamescope
 Version:        3.8.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
@@ -65,6 +65,9 @@ Recommends:     mesa-vulkan-drivers
 
 
 %changelog
+* Wed Jul 21 2021 Fedora Release Engineering <releng@fedoraproject.org> - 3.8.4-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Wed Jul 07 2021 Aleksei Bavshin <alebastr@fedoraproject.org> - 3.8.4-2
 - Pin wlroots dependency to 0.13
 
