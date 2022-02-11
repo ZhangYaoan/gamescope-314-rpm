@@ -1,16 +1,15 @@
-%global libliftoff_minver 0.1.0
+%global libliftoff_minver 0.2.0
 
 Name:           gamescope
-Version:        3.8.4
-Release:        4%{?dist}
+Version:        3.11.9
+Release:        1%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
 URL:            https://github.com/Plagman/gamescope
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-# libliftoff 0.1.0 compatibility patches:
-# https://github.com/Plagman/gamescope/commit/eb5972ccf61707c9549cea7d2551ed8f904158fb
-Patch0:         0001-Bump-libliftoff-to-0.1.0.patch
+# Create stb.pc to satisfy dependency('stb')
+Source1:        stb.pc
 
 BuildRequires:  meson >= 0.54.0
 BuildRequires:  ninja-build
@@ -27,16 +26,20 @@ BuildRequires:  pkgconfig(xtst)
 BuildRequires:  pkgconfig(xres)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(vulkan)
+BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(wayland-server)
 BuildRequires:  pkgconfig(wayland-protocols) >= 1.17
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(sdl2)
-BuildRequires:  (pkgconfig(wlroots) >= 0.13.0 with pkgconfig(wlroots) < 0.14.0)
-BuildRequires:  pkgconfig(libliftoff) >= %{libliftoff_minver}
+BuildRequires:  pkgconfig(libpipewire-0.3)
+BuildRequires:  (pkgconfig(wlroots) >= 0.15.0 with pkgconfig(wlroots) < 0.16)
+BuildRequires:  (pkgconfig(libliftoff) >= 0.2.0 with pkgconfig(libliftoff) < 0.3)
 BuildRequires:  pkgconfig(libcap)
+BuildRequires:  stb_image-devel
+BuildRequires:  stb_image_write-devel
 BuildRequires:  /usr/bin/glslangValidator
 
-# libliftoff hasn't bumped soname, but API/ABI has changed for 0.1.0 release
+# libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
 Requires:       xorg-x11-server-Xwayland
 Recommends:     mesa-dri-drivers
@@ -47,10 +50,14 @@ Recommends:     mesa-vulkan-drivers
 
 %prep
 %autosetup -p1
+# Install stub pkgconfig file
+mkdir -p pkgconfig
+cp %{SOURCE1} pkgconfig/stb.pc
 
 
 %build
-%meson
+export PKG_CONFIG_PATH=pkgconfig
+%meson -Dpipewire=enabled -Dforce_fallback_for=[]
 %meson_build
 
 
@@ -65,6 +72,9 @@ Recommends:     mesa-vulkan-drivers
 
 
 %changelog
+* Thu Feb 10 2022 Neal Gompa <ngompa@fedoraproject.org> - 3.11.9-1
+- Rebase to 3.11.9
+
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 3.8.4-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
