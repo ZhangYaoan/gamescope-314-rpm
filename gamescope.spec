@@ -1,8 +1,8 @@
-%global libliftoff_minver 0.2.0
+%global libliftoff_minver 0.3.0
 
 Name:           gamescope
-Version:        3.11.9
-Release:        2%{?dist}
+Version:        3.11.36
+Release:        1%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
@@ -33,7 +33,7 @@ BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  (pkgconfig(wlroots) >= 0.15.0 with pkgconfig(wlroots) < 0.16)
-BuildRequires:  (pkgconfig(libliftoff) >= 0.2.0 with pkgconfig(libliftoff) < 0.3)
+BuildRequires:  (pkgconfig(libliftoff) >= 0.3.0 with pkgconfig(libliftoff) < 0.4)
 BuildRequires:  pkgconfig(libcap)
 BuildRequires:  stb_image-devel
 BuildRequires:  stb_image_write-devel
@@ -72,6 +72,9 @@ export PKG_CONFIG_PATH=pkgconfig
 
 
 %changelog
+* Fri Aug 19 2022 Frantisek Zatloukal <fzatlouk@redhat.com> - 3.11.36-1
+- Rebase to 3.11.36
+
 * Thu Jul 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 3.11.9-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
 
