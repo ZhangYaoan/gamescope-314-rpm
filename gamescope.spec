@@ -1,7 +1,7 @@
 %global libliftoff_minver 0.3.0
 
 Name:           gamescope
-Version:        3.11.36
+Version:        3.11.43
 Release:        1%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
@@ -72,6 +72,9 @@ export PKG_CONFIG_PATH=pkgconfig
 
 
 %changelog
+* Mon Sep 05 2022 Frantisek Zatloukal <fzatlouk@redhat.com> - 3.11.43-1
+- Rebase to 3.11.43
+
 * Fri Aug 19 2022 Frantisek Zatloukal <fzatlouk@redhat.com> - 3.11.36-1
 - Rebase to 3.11.36
 
