@@ -1,7 +1,7 @@
 %global libliftoff_minver 0.4.1
 
 Name:           gamescope
-Version:        3.12.0
+Version:        3.12.3
 Release:        %autorelease
 Summary:        Micro-compositor for video games on Wayland
 
@@ -10,10 +10,6 @@ URL:            https://github.com/Plagman/gamescope
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 # Create stb.pc to satisfy dependency('stb')
 Source1:        stb.pc
-
-# Fix i686 build
-# https://github.com/ValveSoftware/gamescope/pull/918
-Patch01:        918.patch
 
 BuildRequires:  meson >= 0.54.0
 BuildRequires:  ninja-build
