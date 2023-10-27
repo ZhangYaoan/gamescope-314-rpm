@@ -52,8 +52,12 @@ BuildRequires:  spirv-headers-devel
 # CVE-2023-45661 CVE-2023-45662 CVE-2023-45663 CVE-2023-45664 CVE-2023-45666
 # CVE-2023-45667
 BuildRequires:  stb_image-devel >= 2.28^20231011gitbeebb24-12
+# Header-only library: -static is for tracking per guidelines
+BuildRequires:  stb_image-static
 BuildRequires:  stb_image_resize-devel
+BuildRequires:  stb_image_resize-static
 BuildRequires:  stb_image_write-devel
+BuildRequires:  stb_image_write-static
 BuildRequires:  vkroots-devel
 BuildRequires:  /usr/bin/glslangValidator
 
