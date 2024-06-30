@@ -1,4 +1,8 @@
+%if 0%{?fedora} >= 41
+%global libliftoff_minver 0.5.0
+%else
 %global libliftoff_minver 0.4.1
+%endif
 %global reshade_commit 4245743a8c41abbe3dc73980c1810fe449359bf1
 %global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
 
@@ -14,7 +18,10 @@ Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        stb.pc
 Source2:        https://github.com/Joshua-Ashton/reshade/archive/%{reshade_commit}/reshade-%{reshade_shortcommit}.tar.gz
 
-Patch01:        0001-cstdint.patch
+Patch:          0001-cstdint.patch
+# Allow building with libdisplay-info 0.2.x and libliftoff 0.5.x
+# Includes backport of https://github.com/ValveSoftware/gamescope/pull/1323
+Patch:          gamescope-3.14.2-Update-libliftoff-libdisplay-info.patch
 
 BuildRequires:  meson >= 0.54.0
 BuildRequires:  ninja-build
@@ -45,7 +52,7 @@ BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(libavif)
 BuildRequires:  (pkgconfig(wlroots) >= 0.17.0 with pkgconfig(wlroots) < 0.18)
-BuildRequires:  (pkgconfig(libliftoff) >= 0.4.1 with pkgconfig(libliftoff) < 0.5)
+BuildRequires:  (pkgconfig(libliftoff) >= %{libliftoff_minver} with pkgconfig(libliftoff) < 0.6)
 BuildRequires:  pkgconfig(libcap)
 BuildRequires:  pkgconfig(hwdata)
 BuildRequires:  spirv-headers-devel
