@@ -7,7 +7,7 @@
 %global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
 
 Name:           gamescope
-Version:        3.14.2
+Version:        3.14.29
 Release:        %autorelease
 Summary:        Micro-compositor for video games on Wayland
 
@@ -19,9 +19,12 @@ Source1:        stb.pc
 Source2:        https://github.com/Joshua-Ashton/reshade/archive/%{reshade_commit}/reshade-%{reshade_shortcommit}.tar.gz
 
 Patch:          0001-cstdint.patch
-# Allow building with libdisplay-info 0.2.x and libliftoff 0.5.x
-# Includes backport of https://github.com/ValveSoftware/gamescope/pull/1323
-Patch:          gamescope-3.14.2-Update-libliftoff-libdisplay-info.patch
+# Allow to use system wlroots
+# We use/package rest from the forks, I've tried to verify that wlroots match relevant commits
+# We'll hold on rebases of gamescope if tags diverge in the future
+Patch:          Allow-to-use-system-wlroots.patch
+Patch:          Switch-wlroots-to-the-new-pc-filename.patch
+Patch:          Add-pixman-dependency.patch
 
 BuildRequires:  meson >= 0.54.0
 BuildRequires:  ninja-build
@@ -51,9 +54,11 @@ BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(libavif)
-BuildRequires:  (pkgconfig(wlroots) >= 0.17.0 with pkgconfig(wlroots) < 0.18)
+BuildRequires:  pkgconfig(wlroots-0.18)
 BuildRequires:  (pkgconfig(libliftoff) >= %{libliftoff_minver} with pkgconfig(libliftoff) < 0.6)
 BuildRequires:  pkgconfig(libcap)
+BuildRequires:  pkgconfig(libeis-1.0)
+BuildRequires:  pkgconfig(libdecor-0)
 BuildRequires:  pkgconfig(hwdata)
 BuildRequires:  spirv-headers-devel
 # Enforce the the minimum EVR to contain fixes for all of:
@@ -105,6 +110,9 @@ export PKG_CONFIG_PATH=pkgconfig
 %license LICENSE
 %doc README.md
 %{_bindir}/gamescope
+%{_bindir}/gamescopectl
+%{_bindir}/gamescopereaper
+%{_bindir}/gamescopestream
 %{_libdir}/libVkLayer_FROG_gamescope_wsi_*.so
 %{_datadir}/vulkan/implicit_layer.d/VkLayer_FROG_gamescope_wsi.*.json
 
