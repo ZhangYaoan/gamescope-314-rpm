@@ -11,7 +11,8 @@ Version:        3.15.1
 Release:        %autorelease
 Summary:        Micro-compositor for video games on Wayland
 
-License:        BSD
+# Automatically converted from old format: BSD - review is highly recommended.
+License:        LicenseRef-Callaway-BSD
 URL:            https://github.com/Plagman/gamescope
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 # Create stb.pc to satisfy dependency('stb')
