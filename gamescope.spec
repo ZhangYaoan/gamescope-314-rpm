@@ -7,7 +7,7 @@
 %global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
 
 Name:           gamescope
-Version:        3.15.5
+Version:        3.15.9
 Release:        %autorelease
 Summary:        Micro-compositor for video games on Wayland
 
@@ -32,6 +32,7 @@ BuildRequires:  ninja-build
 BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
+BuildRequires:  git-core
 BuildRequires:  glm-devel
 BuildRequires:  google-benchmark-devel
 BuildRequires:  libXmu-devel
