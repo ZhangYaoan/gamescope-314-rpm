@@ -13,7 +13,7 @@ Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
 URL:            https://github.com/Plagman/gamescope
-Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/Plagman/gamescope/archive/%{version}/%{name}-%{version}.tar.gz
 # Create stb.pc to satisfy dependency('stb')
 Source1:        stb.pc
 # Source2:        https://github.com/Joshua-Ashton/reshade/archive/%{reshade_commit}/reshade-%{reshade_shortcommit}.tar.gz
