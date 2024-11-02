@@ -89,7 +89,7 @@ Recommends:     mesa-vulkan-drivers
 %{original_name} is the micro-compositor optimized for running video games on Wayland.
 
 %prep
-%autosetup -p1 -a2 -N
+%autosetup -p1 -a2 -N -n gamescope-%{version}
 # Install stub pkgconfig file
 mkdir -p pkgconfig
 cp %{SOURCE1} pkgconfig/stb.pc
