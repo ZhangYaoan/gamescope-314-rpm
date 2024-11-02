@@ -1,20 +1,21 @@
-%if 0%{?fedora} >= 41
+%if %{?fedora} >= 41
 %global libliftoff_minver 0.5.0
 %else
 %global libliftoff_minver 0.4.1
 %endif
 %global reshade_commit 4245743a8c41abbe3dc73980c1810fe449359bf1
 %global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
+%global original_name gamescope
 
-Name:           gamescope
+Name:           gamescope3.14
 Version:        3.14.29
 Release:        %autorelease
 Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
 URL:            https://github.com/Plagman/gamescope
-# Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-Source0:        %{name}-%{version}.tar.gz
+# Source0:        %{url}/archive/%{version}/%{original_name}-%{version}.tar.gz
+Source0:        %{original_name}-%{version}.tar.gz
 # Create stb.pc to satisfy dependency('stb')
 Source1:        stb.pc
 # Source2:        https://github.com/Joshua-Ashton/reshade/archive/%{reshade_commit}/reshade-%{reshade_shortcommit}.tar.gz
@@ -85,7 +86,7 @@ Recommends:     mesa-dri-drivers
 Recommends:     mesa-vulkan-drivers
 
 %description
-%{name} is the micro-compositor optimized for running video games on Wayland.
+%{original_name} is the micro-compositor optimized for running video games on Wayland.
 
 %prep
 %autosetup -p1 -a2 -N
